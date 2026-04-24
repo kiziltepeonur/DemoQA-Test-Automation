@@ -1,0 +1,80 @@
+<!--Hangi logun, hangi formatta, nereye (konsola mı, dosyaya mı) yazılacağını belirler.-->
+
+<configuration>
+
+    <!--Test çalışırken logları anlık olarak terminalde göstermek için-->
+    <appender name="CONSOLE" class="ch.qos.logback.core.ConsoleAppender">
+        <encoder>
+            <!--
+                            Pattern (Desen): Her bir log satırının nasıl görüneceğini belirler.
+                            %d{HH:mm:ss.SSS} -> Zaman (Saat:Dakika:Saniye.Milisaniye)
+                            [%thread]          -> Logu üreten Thread'in adı (Paralel testte hangi test olduğunu anlamak için kritik)
+                            %-5level           -> Log seviyesi (INFO, ERROR, vb.) - 5 karakterlik alana sola yaslı.
+                            %logger{36}        -> Logu üreten sınıfın adı (en fazla 36 karakter).
+                            %msg%n             -> Asıl log mesajı ve yeni bir satır.
+                         -->
+            <pattern>%d{HH:mm:ss.SSS} [%thread] %-5level %logger{36} - %msg%n</pattern>
+        </encoder>
+    </appender>
+
+    <!--INFO ve üzeri tüm logları, günlük olarak ayrılmış dosyalarda saklamak için -->
+    <appender name="FILE" class="ch.qos.logback.core.rolling.RollingFileAppender">
+
+        <!--  Logların yazılacağı ana dosya belirler-->
+        <file>logs/test.log</file>
+
+        <!--Log dosyalarının nasıl ve ne zaman arşivleneceğini belirler.  -->
+        <rollingPolicy class="ch.qos.logback.core.rolling.TimeBasedRollingPolicy">
+
+            <!--Her gün yeni bir log dosyası oluşturur. Örn: 'test-2026-04-19.log-->
+            <fileNamePattern>logs/archive/test-%d{yyyy-MM-dd}.log</fileNamePattern>
+
+            <!--maxHistory: Kaç günlük logun saklanacağını belirtir.
+                 Burada 7 günden eski log dosyaları otomatik olarak silinir. Bu, disk alanı tasarrufu sağlar.-->
+            <maxHistory>7</maxHistory>
+        </rollingPolicy>
+        <encoder>
+
+            <!--  Dosya logları için daha detaylı bir zaman damgası formatı.  -->
+            <pattern>%d{yyyy-MM-dd HH:mm:ss.SSS} [%thread] %-5level %logger{36} - %msg%n</pattern>
+        </encoder>
+    </appender>
+
+
+    <!--Sadece ve sadece ERROR seviyesindeki logları ayrı bir dosyada toplamak. -->
+    <appender name="ERROR_FILE" class="ch.qos.logback.core.rolling.RollingFileAppender">
+        <!--  Hata loglarının yazılacağı ana dosya.  -->
+        <file>logs/error.log</file>
+        <!-- Bu kanala hangi seviyedeki logların girebileceğini belirleyen bir kapı bekçisi.  -->
+        <filter class="ch.qos.logback.classic.filter.ThresholdFilter">
+            <!--  Sadece ERROR ve üzeri (varsa) seviyedeki loglara izin ver. INFO ve WARN'ları engelle.  -->
+            <level>ERROR</level>
+        </filter>
+        <!--  Hata logları için de günlük arşivleme politikası.  -->
+        <rollingPolicy class="ch.qos.logback.core.rolling.TimeBasedRollingPolicy">
+            <fileNamePattern>logs/archive/error-%d{yyyy-MM-dd}.log</fileNamePattern>
+            <!--  Hata logları daha önemli olduğu için daha uzun süre (30 gün) saklayalım.  -->
+            <maxHistory>30</maxHistory>
+        </rollingPolicy>
+        <encoder>
+            <pattern>%d{yyyy-MM-dd HH:mm:ss.SSS} [%thread] %-5level %logger{36} - %msg%n</pattern>
+        </encoder>
+    </appender>
+
+
+    <!-- Tüm loglama sisteminin genel seviyesini belirlemek ve aktif kanalları (appender) atamak.  -->
+
+    <root level="info">
+        <!--
+                    level="info": Sadece INFO, WARN ve ERROR seviyesindeki logları işleme al.
+                    Eğer hata ayıklama için daha detaylı loglara ihtiyaç duyarsak, bu seviyeyi "debug" olarak değiştirebiliriz.
+                 -->
+        <!--  Aktif Kanallar: Üretilen her log, aşağıdaki tüm kanallara gönderilir.  -->
+        <appender-ref ref="CONSOLE"/>
+        <!--  Logu konsola gönder.  -->
+        <appender-ref ref="FILE"/>
+        <!--  Logu genel arşive gönder.  -->
+        <appender-ref ref="ERROR_FILE"/>
+        <!--  Logu (eğer ERROR ise) hata kanalına gönder.  -->
+    </root>
+</configuration>
