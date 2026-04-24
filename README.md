@@ -1,61 +1,72 @@
-🚀 DemoQA Selenium BDD Framework
-Bu proje, DemoQA platformu üzerindeki uçtan uca (E2E) test senaryolarını otomatize etmek için Java, Selenium ve Cucumber kullanılarak geliştirilmiş, yüksek sürdürülebilirlik odaklı bir test otomasyon framework'üdür.
+# DemoQA Test Otomasyon Projesi
 
-🛠 Kullanılan Teknolojiler
-Dil: Java
+Bu proje, [DemoQA](https://demoqa.com/ ) web sitesi için Java, Selenium WebDriver, Cucumber ve TestNG kullanılarak geliştirilmiş, **Page Object Model (POM)** tabanlı bir test otomasyon projesidir.
 
-Otomasyon Aracı: Selenium WebDriver
+Projenin temel amacı, modern otomasyon pratiklerini (BDD, POM) kullanarak sürdürülebilir, okunabilir ve ölçeklenebilir test senaryoları oluşturmaktır.
 
-Test Yaklaşımı: BDD (Behavior Driven Development)
+---
 
-Framework: Cucumber & TestNG
+### Kullanılan Teknolojiler
 
-Tasarım Deseni: Page Object Model (POM)
+*   **Programlama Dili:** Java 17
+*   **Otomasyon Kütüphanesi:** Selenium WebDriver
+*   **Test Çatısı:** TestNG & Cucumber (BDD)
+*   **Proje Yönetimi:** Apache Maven
+*   **Tasarım Deseni:** Page Object Model (POM)
+*   **Raporlama:** Allure Framework
+*   **Loglama:** SLF4J & Logback
 
-Raporlama: Allure Reports
+---
 
-Bağımlılık Yönetimi: Maven
+### Temel Özellikler
 
-🏗 Proje Mimarisi
-Proje yapısı, kodun tekrar kullanılabilirliğini (reusability) ve okunabilirliğini artırmak için katmanlı bir yapıda tasarlanmıştır:
+*   **Davranış Odaklı Geliştirme (BDD):** Cucumber ile yazılmış, herkesin anlayabileceği `Gherkin` formatında test senaryoları.
+*   **Modüler Tasarım:** Page Object Model sayesinde UI değişikliklerine karşı dayanıklı ve bakımı kolay bir kod yapısı.
+*   **Paralel Test Desteği:** TestNG sayesinde testlerin aynı anda birden fazla iş parçacığında (thread) çalıştırılmasına olanak tanır.
+*   **Gelişmiş Raporlama:** Başarılı ve hatalı test adımlarını, ekran görüntülerini ve logları içeren interaktif Allure raporları.
+*   **Harici Veri Yönetimi:** Test verileri (URL, tarayıcı tipi vb.) koddan bağımsız olarak `.properties` dosyaları üzerinden yönetilir.
+*   **Dinamik Bekleme:** Elementlerin yüklenmesi için `Explicit Wait` stratejileri kullanılarak testlerin kararlılığı artırılmıştır.
 
-base/: WebDriver yönetimi ve temel sayfa etkileşimleri.
+---
 
-pages/: Web elementlerinin ve sayfaya özgü metodların tutulduğu POM katmanı.
+### Test Edilen Senaryolar
 
-steps/: Gherkin adımlarının Java koduna dönüştürüldüğü tanımlamalar.
+*   **Text Box Formu:** Kullanıcı bilgilerinin forma girilmesi ve gönderilen bilgilerin doğrulanması.
+*   **Check Box Seçimleri:** "Home" klasörü altındaki çeşitli öğelerin seçilmesi ve yapılan seçimlerin doğrulanması.
+*   **Ana Sayfa ve Modül Geçişleri:** Ana sayfadaki modül kartlarının görünürlüğünün ve bu kartlara tıklandığında doğru sayfalara yönlendirilmenin kontrolü.
 
-features/: İş gereksinimlerinin .feature dosyalarında Gherkin diliyle yazılmış senaryoları.
+---
 
-utils/: Konfigürasyon okuyucu ve ortak yardımcı metodlar.
+### Projeyi Çalıştırma
 
-🏃‍♂️ Testleri Çalıştırma
-1. Yerel Ortamda Çalıştırma
-   Tüm testleri Maven üzerinden terminal aracılığıyla tetikleyebilirsiniz:
+**Gereksinimler:**
+*   Java JDK 17 (veya üstü)
+*   Apache Maven
 
-Bash
-mvn clean test
-2. Rapor Oluşturma
-   Test sonuçlarını interaktif Allure raporu olarak görüntülemek için:
+**Adımlar:**
 
-Bash
-# Rapor verilerini oluştur
-mvn allure:report
+1.  **Projeyi Klonlayın:**
+    ```bash
+    git clone https://github.com/kiziltepeonur/DemoQA-Test-Automation.git
+    ```
+2.  **Proje Klasörüne Gidin:**
+    ```bash
+    cd DemoQA-Test-Automation
+    ```
+3.  **Testleri Çalıştırın:** Tüm testleri çalıştırmak için:
+    ```bash
+    mvn clean test
+    ```
+4.  **Sadece Belirli Bir Grubu Çalıştırın (Örn: @smoke ):**
+    ```bash
+    mvn clean test -Dcucumber.filter.tags="@smoke"
+    ```
 
-# Raporu tarayıcıda aç
+---
+
+### Allure Raporunu Görüntüleme
+
+Testler tamamlandıktan sonra raporu oluşturmak ve tarayıcıda açmak için:
+
+```bash
 mvn allure:serve
-📋 Mevcut Test Senaryoları
-Şu anda otomatize edilmiş modüller:
-
-✅ TextBox: Veri girişi ve doğrulama süreçleri.
-
-✅ CheckBox: Dinamik seçim ve ağaç yapısı kontrolleri.
-
-✅ Elements: Genel UI bileşenleri etkileşimleri.
-
-🎯 Gelişim Planı
-[ ] Paralel test çalıştırma desteğinin optimize edilmesi.
-
-[ ] API testleri için RestAssured entegrasyonu.
-
-[ ] GitHub Actions ile CI/CD hattının kurulması.
