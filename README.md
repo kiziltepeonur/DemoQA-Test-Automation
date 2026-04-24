@@ -1,72 +1,64 @@
-# DemoQA Test Otomasyon Projesi
+DemoQA Test Otomasyon Framework'ü
+Bu proje, DemoQA web sitesi için Java, Selenium WebDriver ve Cucumber kullanılarak geliştirilmiş, Page Object Model (POM) tabanlı bir test otomasyon framework'üdür.
 
-Bu proje, [DemoQA](https://demoqa.com/ ) web sitesi için Java, Selenium WebDriver, Cucumber ve TestNG kullanılarak geliştirilmiş, **Page Object Model (POM)** tabanlı bir test otomasyon projesidir.
+Projenin temel amacı, modern otomasyon pratiklerini kullanarak sürdürülebilir, okunabilir ve ölçeklenebilir test senaryoları oluşturmaktır.
 
-Projenin temel amacı, modern otomasyon pratiklerini (BDD, POM) kullanarak sürdürülebilir, okunabilir ve ölçeklenebilir test senaryoları oluşturmaktır.
+Kullanılan Teknolojiler
+Programlama Dili: Java 17
 
----
+Otomasyon Kütüphanesi: Selenium WebDriver
 
-### Kullanılan Teknolojiler
+Test Çatısı: Cucumber (BDD) & TestNG
 
-*   **Programlama Dili:** Java 17
-*   **Otomasyon Kütüphanesi:** Selenium WebDriver
-*   **Test Çatısı:** TestNG & Cucumber (BDD)
-*   **Proje Yönetimi:** Apache Maven
-*   **Tasarım Deseni:** Page Object Model (POM)
-*   **Raporlama:** Allure Framework
-*   **Loglama:** SLF4J & Logback
+Proje Yönetimi: Apache Maven
 
----
+Tasarım Deseni: Page Object Model (POM)
 
-### Temel Özellikler
+Raporlama: Allure Framework
 
-*   **Davranış Odaklı Geliştirme (BDD):** Cucumber ile yazılmış, herkesin anlayabileceği `Gherkin` formatında test senaryoları.
-*   **Modüler Tasarım:** Page Object Model sayesinde UI değişikliklerine karşı dayanıklı ve bakımı kolay bir kod yapısı.
-*   **Paralel Test Desteği:** TestNG sayesinde testlerin aynı anda birden fazla iş parçacığında (thread) çalıştırılmasına olanak tanır.
-*   **Gelişmiş Raporlama:** Başarılı ve hatalı test adımlarını, ekran görüntülerini ve logları içeren interaktif Allure raporları.
-*   **Harici Veri Yönetimi:** Test verileri (URL, tarayıcı tipi vb.) koddan bağımsız olarak `.properties` dosyaları üzerinden yönetilir.
-*   **Dinamik Bekleme:** Elementlerin yüklenmesi için `Explicit Wait` stratejileri kullanılarak testlerin kararlılığı artırılmıştır.
+Sürücü Yönetimi: WebDriverManager
 
----
+Loglama: Log4j & SLF4J
 
-### Test Edilen Senaryolar
+Temel Özellikler
+Modüler Tasarım: Page Object Model sayesinde UI değişikliklerine karşı dayanıklı ve bakımı kolay bir kod yapısı.
 
-*   **Text Box Formu:** Kullanıcı bilgilerinin forma girilmesi ve gönderilen bilgilerin doğrulanması.
-*   **Check Box Seçimleri:** "Home" klasörü altındaki çeşitli öğelerin seçilmesi ve yapılan seçimlerin doğrulanması.
-*   **Ana Sayfa ve Modül Geçişleri:** Ana sayfadaki modül kartlarının görünürlüğünün ve bu kartlara tıklandığında doğru sayfalara yönlendirilmenin kontrolü.
+BDD Yaklaşımı: Gherkin dili (.feature dosyaları) ile teknik olmayan kişilerin de anlayabileceği canlı dökümantasyon.
 
----
+Gelişmiş Raporlama: Başarılı ve hatalı test adımlarını, hata anı ekran görüntülerini içeren interaktif Allure raporları.
 
-### Projeyi Çalıştırma
+Harici Veri Yönetimi: Test verileri (URL, timeout süreleri vb.) koddan bağımsız olarak config.properties dosyası üzerinden yönetilir.
 
-**Gereksinimler:**
-*   Java JDK 17 (veya üstü)
-*   Apache Maven
+Merkezi Sabitler: FrameworkConstants sınıfı ile proje içi dosya yolları ve statik değerlerin tek merkezden kontrolü.
 
-**Adımlar:**
+Test Edilen Senaryolar
+TextBox: Kullanıcı bilgilerinin girilmesi ve gönderilen verilerin doğrulanması.
 
-1.  **Projeyi Klonlayın:**
-    ```bash
-    git clone https://github.com/kiziltepeonur/DemoQA-Test-Automation.git
-    ```
-2.  **Proje Klasörüne Gidin:**
-    ```bash
-    cd DemoQA-Test-Automation
-    ```
-3.  **Testleri Çalıştırın:** Tüm testleri çalıştırmak için:
-    ```bash
-    mvn clean test
-    ```
-4.  **Sadece Belirli Bir Grubu Çalıştırın (Örn: @smoke ):**
-    ```bash
-    mvn clean test -Dcucumber.filter.tags="@smoke"
-    ```
+CheckBox: Hiyerarşik yapıdaki seçimlerin ve durum değişikliklerinin kontrolü.
 
----
+Elements: Genel web element etkileşimleri ve validasyon süreçleri.
 
-### Allure Raporunu Görüntüleme
+Projeyi Çalıştırma
+Gereksinimler
+Java JDK 17 (veya üstü)
 
-Testler tamamlandıktan sonra raporu oluşturmak ve tarayıcıda açmak için:
+Apache Maven
 
-```bash
-mvn allure:serve
+Adımlar:
+Projeyi Klonlayın:
+
+Bash
+git clone https://github.com/kiziltepeonur/DemoQA-Test-Automation.git
+Proje Klasörüne Gidin:
+
+Bash
+cd DemoQA-Test-Automation
+Testleri Çalıştırın: Tüm testleri çalıştırmak için:
+
+Bash
+mvn clean test
+Allure Raporunu Görüntüleyin: Testler tamamlandıktan sonra raporu tarayıcıda açmak için:
+
+Bash
+allure serve
+(Bu komut için sisteminizde Allure Commandline'ın kurulu olması gerekmektedir.)
