@@ -77,8 +77,10 @@ Testler tamamlandıktan sonra raporu oluşturmak ve tarayıcıda açmak için:
 ```bash
 mvn allure:serve
 
+---
+
 ## 📊 Örnek Allure Raporu
 
-Projenin test sonuçlarını gösteren Allure raporunun ayrıntılı bir görünümü aşağıdadır. Rapor, test adımlarını, veri tablolarını ve ekran görüntülerini içermektedir.
+Projenin test sonuçlarını gösteren Allure raporunun ayrıntılı bir görünümü aşağıdadır. Rapor; test adımlarını, veri tablolarını ve detaylı uygulama çıktılarını içermektedir.
 
 ![Allure Ayrıntılı Raporu](allure-detailed-report.png)
