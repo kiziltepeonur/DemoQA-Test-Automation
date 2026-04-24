@@ -74,13 +74,10 @@ Projenin temel amacı, modern otomasyon pratiklerini kullanarak sürdürülebili
 
 Testler tamamlandıktan sonra raporu oluşturmak ve tarayıcıda açmak için:
 
+
+### 📊 Allure Raporu Görünümü
+
+Testlerin başarıyla tamamlandığını gösteren detaylı rapor çıktısı aşağıdadır:
+
+![Allure Raporu](allure-detailed-report.png)
 ```bash
-mvn allure:serve
-
----
-
-## 📊 Örnek Allure Raporu
-
-Projenin test sonuçlarını gösteren Allure raporunun ayrıntılı bir görünümü aşağıdadır. Rapor; test adımlarını, veri tablolarını ve detaylı uygulama çıktılarını içermektedir.
-
-![Allure Ayrıntılı Raporu](allure-detailed-report.png)
